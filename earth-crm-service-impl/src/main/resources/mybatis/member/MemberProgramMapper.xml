@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.hworld.mapper.member.MemberProgramMapper">
+  <sql id="Base_Column_List">
+      t.id,
+      t.program_code,
+      t.program_name,
+      t.is_check_code,
+      t.is_default,
+      t.is_disable,
+      t.type,
+      t.member_code_length,
+      t.member_number_prefix,
+      t.logo_url,
+      t.reward_type,
+      t.deleted_flag,
+      t.created_by,
+      t.created_name,
+      t.created_on,
+      t.modified_by,
+      t.modified_name,
+      t.modified_on
+  </sql>
+  <sql id="Where_List">
+      <if test="createTime != null">
+          AND t.CREATE_TIME_ <![CDATA[ >= ]]> #{createTime}
+      </if>
+      <if test="createUserId != null">
+          AND t.CREATE_USER_ID_ = #{createUserId}
+      </if>
+      <if test="id != null">
+          AND t.id = #{id}
+      </if>
+      <if test="programCode != null and programCode.length()!=0">
+          AND t.program_code = #{programCode}
+      </if>
+      <if test="programName != null and programName.length()!=0">
+          AND t.program_name = #{programName}
+      </if>
+      <if test="isCheckCode != null">
+          AND t.is_check_code = #{isCheckCode}
+      </if>
+      <if test="isDefault != null">
+          AND t.is_default = #{isDefault}
+      </if>
+      <if test="isDisable != null">
+          AND t.is_disable = #{isDisable}
+      </if>
+      <if test="type != null and type.length()!=0">
+          AND t.type = #{type}
+      </if>
+      <if test="memberCodeLength != null and memberCodeLength.length()!=0">
+          AND t.member_code_length = #{memberCodeLength}
+      </if>
+      <if test="memberNumberPrefix != null and memberNumberPrefix.length()!=0">
+          AND t.member_number_prefix = #{memberNumberPrefix}
+      </if>
+      <if test="logoUrl != null and logoUrl.length()!=0">
+          AND t.logo_url = #{logoUrl}
+      </if>
+      <if test="rewardType != null and rewardType.length()!=0">
+          AND t.reward_type = #{rewardType}
+      </if>
+      <if test="deletedFlag != null">
+          AND t.deleted_flag = #{deletedFlag}
+      </if>
+      <if test="createdBy != null">
+          AND t.created_by = #{createdBy}
+      </if>
+      <if test="createdName != null and createdName.length()!=0">
+          AND t.created_name = #{createdName}
+      </if>
+      <if test="createdOn != null">
+          AND t.created_on <![CDATA[ >= ]]> #{createdOn}
+      </if>
+      <if test="modifiedBy != null">
+          AND t.modified_by = #{modifiedBy}
+      </if>
+      <if test="modifiedName != null and modifiedName.length()!=0">
+          AND t.modified_name = #{modifiedName}
+      </if>
+      <if test="modifiedOn != null">
+          AND t.modified_on <![CDATA[ >= ]]> #{modifiedOn}
+      </if>
+  </sql>
+  <sql id="Set_List">
+      t.program_code = #{programCode},
+      t.program_name = #{programName},
+      t.is_check_code = #{isCheckCode},
+      t.is_default = #{isDefault},
+      t.is_disable = #{isDisable},
+      t.type = #{type},
+      t.member_code_length = #{memberCodeLength},
+      t.member_number_prefix = #{memberNumberPrefix},
+      t.logo_url = #{logoUrl},
+      t.reward_type = #{rewardType},
+      t.deleted_flag = #{deletedFlag},
+      t.created_by = #{createdBy},
+      t.created_name = #{createdName},
+      t.created_on = #{createdOn},
+      t.modified_by = #{modifiedBy},
+      t.modified_name = #{modifiedName},
+      t.modified_on = #{modifiedOn}
+  </sql>
+</mapper>

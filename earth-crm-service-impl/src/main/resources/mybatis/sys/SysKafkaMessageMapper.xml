@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.hworld.mapper.sys.SysKafkaMessageMapper">
+  <sql id="Base_Column_List">
+      t.id,
+      t.message_id,
+      t.message_topic,
+      t.message_status,
+      t.partition,
+      t.producer_times,
+      t.consumer_times,
+      t.remark,
+      t.deleted_flag,
+      t.created_by,
+      t.created_name,
+      t.created_on,
+      t.modified_by,
+      t.modified_name,
+      t.modified_on
+  </sql>
+  <sql id="Where_List">
+      <if test="createTime != null">
+          AND t.CREATE_TIME_ <![CDATA[ >= ]]> #{createTime}
+      </if>
+      <if test="createUserId != null">
+          AND t.CREATE_USER_ID_ = #{createUserId}
+      </if>
+      <if test="id != null">
+          AND t.id = #{id}
+      </if>
+      <if test="messageId != null and messageId.length()!=0">
+          AND t.message_id = #{messageId}
+      </if>
+      <if test="messageTopic != null and messageTopic.length()!=0">
+          AND t.message_topic = #{messageTopic}
+      </if>
+      <if test="messageStatus != null">
+          AND t.message_status = #{messageStatus}
+      </if>
+      <if test="partition != null">
+          AND t.partition = #{partition}
+      </if>
+      <if test="producerTimes != null">
+          AND t.producer_times = #{producerTimes}
+      </if>
+      <if test="consumerTimes != null">
+          AND t.consumer_times = #{consumerTimes}
+      </if>
+      <if test="remark != null and remark.length()!=0">
+          AND t.remark = #{remark}
+      </if>
+      <if test="deletedFlag != null">
+          AND t.deleted_flag = #{deletedFlag}
+      </if>
+      <if test="createdBy != null">
+          AND t.created_by = #{createdBy}
+      </if>
+      <if test="createdName != null and createdName.length()!=0">
+          AND t.created_name = #{createdName}
+      </if>
+      <if test="createdOn != null">
+          AND t.created_on <![CDATA[ >= ]]> #{createdOn}
+      </if>
+      <if test="modifiedBy != null">
+          AND t.modified_by = #{modifiedBy}
+      </if>
+      <if test="modifiedName != null and modifiedName.length()!=0">
+          AND t.modified_name = #{modifiedName}
+      </if>
+      <if test="modifiedOn != null">
+          AND t.modified_on <![CDATA[ >= ]]> #{modifiedOn}
+      </if>
+  </sql>
+  <sql id="Set_List">
+      t.message_id = #{messageId},
+      t.message_topic = #{messageTopic},
+      t.message_status = #{messageStatus},
+      t.partition = #{partition},
+      t.producer_times = #{producerTimes},
+      t.consumer_times = #{consumerTimes},
+      t.remark = #{remark},
+      t.deleted_flag = #{deletedFlag},
+      t.created_by = #{createdBy},
+      t.created_name = #{createdName},
+      t.created_on = #{createdOn},
+      t.modified_by = #{modifiedBy},
+      t.modified_name = #{modifiedName},
+      t.modified_on = #{modifiedOn}
+  </sql>
+</mapper>

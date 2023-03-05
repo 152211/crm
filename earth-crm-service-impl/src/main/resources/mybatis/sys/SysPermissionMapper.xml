@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.hworld.mapper.sys.SysPermissionMapper">
+  <sql id="Base_Column_List">
+      t.id,
+      t.parent_id,
+      t.permission_code,
+      t.permission_type,
+      t.permission_url,
+      t.permission_name_cn,
+      t.permission_name_en,
+      t.deleted_flag,
+      t.created_by,
+      t.created_name,
+      t.created_on,
+      t.modified_by,
+      t.modified_name,
+      t.modified_on
+  </sql>
+  <sql id="Where_List">
+      <if test="createTime != null">
+          AND t.CREATE_TIME_ <![CDATA[ >= ]]> #{createTime}
+      </if>
+      <if test="createUserId != null">
+          AND t.CREATE_USER_ID_ = #{createUserId}
+      </if>
+      <if test="id != null">
+          AND t.id = #{id}
+      </if>
+      <if test="parentId != null">
+          AND t.parent_id = #{parentId}
+      </if>
+      <if test="permissionCode != null and permissionCode.length()!=0">
+          AND t.permission_code = #{permissionCode}
+      </if>
+      <if test="permissionType != null and permissionType.length()!=0">
+          AND t.permission_type = #{permissionType}
+      </if>
+      <if test="permissionUrl != null and permissionUrl.length()!=0">
+          AND t.permission_url = #{permissionUrl}
+      </if>
+      <if test="permissionNameCn != null and permissionNameCn.length()!=0">
+          AND t.permission_name_cn = #{permissionNameCn}
+      </if>
+      <if test="permissionNameEn != null and permissionNameEn.length()!=0">
+          AND t.permission_name_en = #{permissionNameEn}
+      </if>
+      <if test="deletedFlag != null and deletedFlag.length()!=0">
+          AND t.deleted_flag = #{deletedFlag}
+      </if>
+      <if test="createdBy != null">
+          AND t.created_by = #{createdBy}
+      </if>
+      <if test="createdName != null and createdName.length()!=0">
+          AND t.created_name = #{createdName}
+      </if>
+      <if test="createdOn != null">
+          AND t.created_on <![CDATA[ >= ]]> #{createdOn}
+      </if>
+      <if test="modifiedBy != null">
+          AND t.modified_by = #{modifiedBy}
+      </if>
+      <if test="modifiedName != null and modifiedName.length()!=0">
+          AND t.modified_name = #{modifiedName}
+      </if>
+      <if test="modifiedOn != null">
+          AND t.modified_on <![CDATA[ >= ]]> #{modifiedOn}
+      </if>
+  </sql>
+  <sql id="Set_List">
+      t.parent_id = #{parentId},
+      t.permission_code = #{permissionCode},
+      t.permission_type = #{permissionType},
+      t.permission_url = #{permissionUrl},
+      t.permission_name_cn = #{permissionNameCn},
+      t.permission_name_en = #{permissionNameEn},
+      t.deleted_flag = #{deletedFlag},
+      t.created_by = #{createdBy},
+      t.created_name = #{createdName},
+      t.created_on = #{createdOn},
+      t.modified_by = #{modifiedBy},
+      t.modified_name = #{modifiedName},
+      t.modified_on = #{modifiedOn}
+  </sql>
+</mapper>

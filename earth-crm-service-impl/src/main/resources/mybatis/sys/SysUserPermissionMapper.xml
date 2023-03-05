@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.hworld.mapper.sys.SysUserPermissionMapper">
+  <sql id="Base_Column_List">
+      t.id,
+      t.user_id,
+      t.permission_id,
+      t.permission_code,
+      t.deleted_flag,
+      t.created_by,
+      t.created_name,
+      t.created_on,
+      t.modified_by,
+      t.modified_name,
+      t.modified_on
+  </sql>
+  <sql id="Where_List">
+      <if test="createTime != null">
+          AND t.CREATE_TIME_ <![CDATA[ >= ]]> #{createTime}
+      </if>
+      <if test="createUserId != null">
+          AND t.CREATE_USER_ID_ = #{createUserId}
+      </if>
+      <if test="id != null">
+          AND t.id = #{id}
+      </if>
+      <if test="userId != null">
+          AND t.user_id = #{userId}
+      </if>
+      <if test="permissionId != null">
+          AND t.permission_id = #{permissionId}
+      </if>
+      <if test="permissionCode != null and permissionCode.length()!=0">
+          AND t.permission_code = #{permissionCode}
+      </if>
+      <if test="deletedFlag != null and deletedFlag.length()!=0">
+          AND t.deleted_flag = #{deletedFlag}
+      </if>
+      <if test="createdBy != null">
+          AND t.created_by = #{createdBy}
+      </if>
+      <if test="createdName != null and createdName.length()!=0">
+          AND t.created_name = #{createdName}
+      </if>
+      <if test="createdOn != null">
+          AND t.created_on <![CDATA[ >= ]]> #{createdOn}
+      </if>
+      <if test="modifiedBy != null">
+          AND t.modified_by = #{modifiedBy}
+      </if>
+      <if test="modifiedName != null and modifiedName.length()!=0">
+          AND t.modified_name = #{modifiedName}
+      </if>
+      <if test="modifiedOn != null">
+          AND t.modified_on <![CDATA[ >= ]]> #{modifiedOn}
+      </if>
+  </sql>
+  <sql id="Set_List">
+      t.user_id = #{userId},
+      t.permission_id = #{permissionId},
+      t.permission_code = #{permissionCode},
+      t.deleted_flag = #{deletedFlag},
+      t.created_by = #{createdBy},
+      t.created_name = #{createdName},
+      t.created_on = #{createdOn},
+      t.modified_by = #{modifiedBy},
+      t.modified_name = #{modifiedName},
+      t.modified_on = #{modifiedOn}
+  </sql>
+</mapper>

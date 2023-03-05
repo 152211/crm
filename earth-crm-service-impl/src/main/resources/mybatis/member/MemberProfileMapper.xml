@@ -1,0 +1,350 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.hworld.mapper.member.MemberProfileMapper">
+  <sql id="Base_Column_List">
+      t.id,
+      t.member_code,
+      t.member_name,
+      t.member_type_code,
+      t.first_name,
+      t.last_name,
+      t.prof_id,
+      t.sso_id,
+      t.member_program_id,
+      t.member_program_code,
+      t.member_code_length,
+      t.member_code_prefix,
+      t.member_level_id,
+      t.member_level_code,
+      t.member_level_modified_time,
+      t.member_level_expired_time,
+      t.consumption_point,
+      t.upgrade_point,
+      t.upgrade_night,
+      t.mobile_phone,
+      t.mobile_phone_country_code,
+      t.home_phone,
+      t.home_phone_country_code,
+      t.company_phone,
+      t.company_phone_country_code,
+      t.email,
+      t.email_states,
+      t.is_disable,
+      t.is_hidden,
+      t.is_anonymity,
+      t.certificate_type_code,
+      t.certificate_number,
+      t.gender,
+      t.birthday,
+      t.nationality_code,
+      t.nationality_name,
+      t.country_code,
+      t.country_name,
+      t.state_code,
+      t.state_name,
+      t.city_code,
+      t.city_name,
+      t.zip_code,
+      t.district_code,
+      t.district_name,
+      t.address_type,
+      t.address,
+      t.detailed_address,
+      t.job_title_code,
+      t.job_title_name,
+      t.registration_time,
+      t.password_hash,
+      t.password_salt,
+      t.source_code,
+      t.source_name,
+      t.channel_code,
+      t.channel_name,
+      t.language_code,
+      t.language_name,
+      t.remarks,
+      t.deleted_flag,
+      t.created_by,
+      t.created_name,
+      t.created_on,
+      t.modified_by,
+      t.modified_name,
+      t.modified_on
+  </sql>
+  <sql id="Where_List">
+      <if test="createTime != null">
+          AND t.CREATE_TIME_ <![CDATA[ >= ]]> #{createTime}
+      </if>
+      <if test="createUserId != null">
+          AND t.CREATE_USER_ID_ = #{createUserId}
+      </if>
+      <if test="id != null">
+          AND t.id = #{id}
+      </if>
+      <if test="memberCode != null and memberCode.length()!=0">
+          AND t.member_code = #{memberCode}
+      </if>
+      <if test="memberName != null and memberName.length()!=0">
+          AND t.member_name = #{memberName}
+      </if>
+      <if test="memberTypeCode != null and memberTypeCode.length()!=0">
+          AND t.member_type_code = #{memberTypeCode}
+      </if>
+      <if test="firstName != null and firstName.length()!=0">
+          AND t.first_name = #{firstName}
+      </if>
+      <if test="lastName != null and lastName.length()!=0">
+          AND t.last_name = #{lastName}
+      </if>
+      <if test="profId != null and profId.length()!=0">
+          AND t.prof_id = #{profId}
+      </if>
+      <if test="ssoId != null and ssoId.length()!=0">
+          AND t.sso_id = #{ssoId}
+      </if>
+      <if test="memberProgramId != null">
+          AND t.member_program_id = #{memberProgramId}
+      </if>
+      <if test="memberProgramCode != null and memberProgramCode.length()!=0">
+          AND t.member_program_code = #{memberProgramCode}
+      </if>
+      <if test="memberCodeLength != null and memberCodeLength.length()!=0">
+          AND t.member_code_length = #{memberCodeLength}
+      </if>
+      <if test="memberCodePrefix != null and memberCodePrefix.length()!=0">
+          AND t.member_code_prefix = #{memberCodePrefix}
+      </if>
+      <if test="memberLevelId != null">
+          AND t.member_level_id = #{memberLevelId}
+      </if>
+      <if test="memberLevelCode != null and memberLevelCode.length()!=0">
+          AND t.member_level_code = #{memberLevelCode}
+      </if>
+      <if test="memberLevelModifiedTime != null">
+          AND t.member_level_modified_time <![CDATA[ >= ]]> #{memberLevelModifiedTime}
+      </if>
+      <if test="memberLevelExpiredTime != null">
+          AND t.member_level_expired_time <![CDATA[ >= ]]> #{memberLevelExpiredTime}
+      </if>
+      <if test="consumptionPoint != null and consumptionPoint.length()!=0">
+          AND t.consumption_point = #{consumptionPoint}
+      </if>
+      <if test="upgradePoint != null and upgradePoint.length()!=0">
+          AND t.upgrade_point = #{upgradePoint}
+      </if>
+      <if test="upgradeNight != null">
+          AND t.upgrade_night = #{upgradeNight}
+      </if>
+      <if test="mobilePhone != null and mobilePhone.length()!=0">
+          AND t.mobile_phone = #{mobilePhone}
+      </if>
+      <if test="mobilePhoneCountryCode != null and mobilePhoneCountryCode.length()!=0">
+          AND t.mobile_phone_country_code = #{mobilePhoneCountryCode}
+      </if>
+      <if test="homePhone != null and homePhone.length()!=0">
+          AND t.home_phone = #{homePhone}
+      </if>
+      <if test="homePhoneCountryCode != null and homePhoneCountryCode.length()!=0">
+          AND t.home_phone_country_code = #{homePhoneCountryCode}
+      </if>
+      <if test="companyPhone != null and companyPhone.length()!=0">
+          AND t.company_phone = #{companyPhone}
+      </if>
+      <if test="companyPhoneCountryCode != null and companyPhoneCountryCode.length()!=0">
+          AND t.company_phone_country_code = #{companyPhoneCountryCode}
+      </if>
+      <if test="email != null and email.length()!=0">
+          AND t.email = #{email}
+      </if>
+      <if test="emailStates != null and emailStates.length()!=0">
+          AND t.email_states = #{emailStates}
+      </if>
+      <if test="isDisable != null">
+          AND t.is_disable = #{isDisable}
+      </if>
+      <if test="isHidden != null">
+          AND t.is_hidden = #{isHidden}
+      </if>
+      <if test="isAnonymity != null">
+          AND t.is_anonymity = #{isAnonymity}
+      </if>
+      <if test="certificateTypeCode != null and certificateTypeCode.length()!=0">
+          AND t.certificate_type_code = #{certificateTypeCode}
+      </if>
+      <if test="certificateNumber != null and certificateNumber.length()!=0">
+          AND t.certificate_number = #{certificateNumber}
+      </if>
+      <if test="gender != null">
+          AND t.gender = #{gender}
+      </if>
+      <if test="birthday != null and birthday.length()!=0">
+          AND t.birthday = #{birthday}
+      </if>
+      <if test="nationalityCode != null and nationalityCode.length()!=0">
+          AND t.nationality_code = #{nationalityCode}
+      </if>
+      <if test="nationalityName != null and nationalityName.length()!=0">
+          AND t.nationality_name = #{nationalityName}
+      </if>
+      <if test="countryCode != null and countryCode.length()!=0">
+          AND t.country_code = #{countryCode}
+      </if>
+      <if test="countryName != null and countryName.length()!=0">
+          AND t.country_name = #{countryName}
+      </if>
+      <if test="stateCode != null and stateCode.length()!=0">
+          AND t.state_code = #{stateCode}
+      </if>
+      <if test="stateName != null and stateName.length()!=0">
+          AND t.state_name = #{stateName}
+      </if>
+      <if test="cityCode != null and cityCode.length()!=0">
+          AND t.city_code = #{cityCode}
+      </if>
+      <if test="cityName != null and cityName.length()!=0">
+          AND t.city_name = #{cityName}
+      </if>
+      <if test="zipCode != null and zipCode.length()!=0">
+          AND t.zip_code = #{zipCode}
+      </if>
+      <if test="districtCode != null and districtCode.length()!=0">
+          AND t.district_code = #{districtCode}
+      </if>
+      <if test="districtName != null and districtName.length()!=0">
+          AND t.district_name = #{districtName}
+      </if>
+      <if test="addressType != null and addressType.length()!=0">
+          AND t.address_type = #{addressType}
+      </if>
+      <if test="address != null and address.length()!=0">
+          AND t.address = #{address}
+      </if>
+      <if test="detailedAddress != null and detailedAddress.length()!=0">
+          AND t.detailed_address = #{detailedAddress}
+      </if>
+      <if test="jobTitleCode != null and jobTitleCode.length()!=0">
+          AND t.job_title_code = #{jobTitleCode}
+      </if>
+      <if test="jobTitleName != null and jobTitleName.length()!=0">
+          AND t.job_title_name = #{jobTitleName}
+      </if>
+      <if test="registrationTime != null">
+          AND t.registration_time <![CDATA[ >= ]]> #{registrationTime}
+      </if>
+      <if test="passwordHash != null and passwordHash.length()!=0">
+          AND t.password_hash = #{passwordHash}
+      </if>
+      <if test="passwordSalt != null and passwordSalt.length()!=0">
+          AND t.password_salt = #{passwordSalt}
+      </if>
+      <if test="sourceCode != null and sourceCode.length()!=0">
+          AND t.source_code = #{sourceCode}
+      </if>
+      <if test="sourceName != null and sourceName.length()!=0">
+          AND t.source_name = #{sourceName}
+      </if>
+      <if test="channelCode != null and channelCode.length()!=0">
+          AND t.channel_code = #{channelCode}
+      </if>
+      <if test="channelName != null and channelName.length()!=0">
+          AND t.channel_name = #{channelName}
+      </if>
+      <if test="languageCode != null and languageCode.length()!=0">
+          AND t.language_code = #{languageCode}
+      </if>
+      <if test="languageName != null and languageName.length()!=0">
+          AND t.language_name = #{languageName}
+      </if>
+      <if test="remarks != null and remarks.length()!=0">
+          AND t.remarks = #{remarks}
+      </if>
+      <if test="deletedFlag != null">
+          AND t.deleted_flag = #{deletedFlag}
+      </if>
+      <if test="createdBy != null">
+          AND t.created_by = #{createdBy}
+      </if>
+      <if test="createdName != null and createdName.length()!=0">
+          AND t.created_name = #{createdName}
+      </if>
+      <if test="createdOn != null">
+          AND t.created_on <![CDATA[ >= ]]> #{createdOn}
+      </if>
+      <if test="modifiedBy != null">
+          AND t.modified_by = #{modifiedBy}
+      </if>
+      <if test="modifiedName != null and modifiedName.length()!=0">
+          AND t.modified_name = #{modifiedName}
+      </if>
+      <if test="modifiedOn != null">
+          AND t.modified_on <![CDATA[ >= ]]> #{modifiedOn}
+      </if>
+  </sql>
+  <sql id="Set_List">
+      t.member_code = #{memberCode},
+      t.member_name = #{memberName},
+      t.member_type_code = #{memberTypeCode},
+      t.first_name = #{firstName},
+      t.last_name = #{lastName},
+      t.prof_id = #{profId},
+      t.sso_id = #{ssoId},
+      t.member_program_id = #{memberProgramId},
+      t.member_program_code = #{memberProgramCode},
+      t.member_code_length = #{memberCodeLength},
+      t.member_code_prefix = #{memberCodePrefix},
+      t.member_level_id = #{memberLevelId},
+      t.member_level_code = #{memberLevelCode},
+      t.member_level_modified_time = #{memberLevelModifiedTime},
+      t.member_level_expired_time = #{memberLevelExpiredTime},
+      t.consumption_point = #{consumptionPoint},
+      t.upgrade_point = #{upgradePoint},
+      t.upgrade_night = #{upgradeNight},
+      t.mobile_phone = #{mobilePhone},
+      t.mobile_phone_country_code = #{mobilePhoneCountryCode},
+      t.home_phone = #{homePhone},
+      t.home_phone_country_code = #{homePhoneCountryCode},
+      t.company_phone = #{companyPhone},
+      t.company_phone_country_code = #{companyPhoneCountryCode},
+      t.email = #{email},
+      t.email_states = #{emailStates},
+      t.is_disable = #{isDisable},
+      t.is_hidden = #{isHidden},
+      t.is_anonymity = #{isAnonymity},
+      t.certificate_type_code = #{certificateTypeCode},
+      t.certificate_number = #{certificateNumber},
+      t.gender = #{gender},
+      t.birthday = #{birthday},
+      t.nationality_code = #{nationalityCode},
+      t.nationality_name = #{nationalityName},
+      t.country_code = #{countryCode},
+      t.country_name = #{countryName},
+      t.state_code = #{stateCode},
+      t.state_name = #{stateName},
+      t.city_code = #{cityCode},
+      t.city_name = #{cityName},
+      t.zip_code = #{zipCode},
+      t.district_code = #{districtCode},
+      t.district_name = #{districtName},
+      t.address_type = #{addressType},
+      t.address = #{address},
+      t.detailed_address = #{detailedAddress},
+      t.job_title_code = #{jobTitleCode},
+      t.job_title_name = #{jobTitleName},
+      t.registration_time = #{registrationTime},
+      t.password_hash = #{passwordHash},
+      t.password_salt = #{passwordSalt},
+      t.source_code = #{sourceCode},
+      t.source_name = #{sourceName},
+      t.channel_code = #{channelCode},
+      t.channel_name = #{channelName},
+      t.language_code = #{languageCode},
+      t.language_name = #{languageName},
+      t.remarks = #{remarks},
+      t.deleted_flag = #{deletedFlag},
+      t.created_by = #{createdBy},
+      t.created_name = #{createdName},
+      t.created_on = #{createdOn},
+      t.modified_by = #{modifiedBy},
+      t.modified_name = #{modifiedName},
+      t.modified_on = #{modifiedOn}
+  </sql>
+</mapper>

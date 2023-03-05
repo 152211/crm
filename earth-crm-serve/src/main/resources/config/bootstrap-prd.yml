@@ -1,0 +1,269 @@
+server:
+  port: 7000
+  servlet:
+    encoding:
+      force: true
+      enabled: true
+      charset: utf-8
+
+logging:
+  file:
+    path: G:\data\logs\
+  level:
+    # 覆盖 logback-spring.xml中root定义的级别
+    ROOT: info
+    # 自定义其他日志级别
+    com: debug
+    com.hworld: debug
+    ExceptionAdvice: trace
+    com.hworld.api.impl.mapper: debug
+
+mybatis-plus:
+  # xml文件路径
+  mapper-locations: classpath:mybatis/**/*.xml
+
+spring:
+  application:
+    ###服务的名称
+    name: earth-crm
+  main:
+    # 打印执行的sql语句
+    allow-bean-definition-overriding: true
+  cloud:
+    nacos:
+      config:
+        enabled: false # 产品分支暂不需要接入nacos config
+      discovery:
+        enabled: false # 产品分支暂不需要接入nacos registry
+  jackson:
+    serialization:
+      # 格式化输出
+      indent-output: true
+    time-zone: UTC
+  datasource:
+    driver-class-name: com.mysql.jdbc.Driver
+    url: jdbc:mysql://10.100.249.138:55988/v2.0_crm_member_db?rewriteBatchedStatements=true&useUnicode=true&characterEncoding=UTF-8&serverTimezone=GMT%2B8
+    username: uws_crm
+    password: Abc@123.com
+  redis:
+    host: 10.100.244.34
+    port: 6379
+    database: 97
+  rabbitmq:
+    ####连接地址
+    host: 119.3.55.246
+    ####端口号
+    port: 5672
+    ####账号
+    username: admin
+    ####密码
+    password: admin
+    ### 地址
+    virtual-host: /
+    # 消息发送到交换机确认机制 是否需要回调
+    publisher-returns: true
+    # 开启发送确认机制
+    publisher-confirm-type: correlated
+
+    #只要消息到达队列，以异步的方式优先回调我们这个returnconfirm
+    template:
+      mandatory: true
+    listener:
+      type: simple
+      simple:
+        #重试次数超过上面的设置之后是否丢弃（false不丢弃时需要写相应代码将该消息加入死信队列）
+        default-requeue-rejected: false
+        #采用应答机制 none自动确认 manual手动应答
+        acknowledge-mode: manual
+        retry:
+          #是否支持重试
+          enabled: true
+          # 重试次数,默认为3次
+          max-attempts: 3
+          # 重试最大间隔时间
+          max-interval: 10000
+          # 重试初始间隔时间
+          initial-interval: 2000
+          # 间隔时间乘子，间隔时间*乘子=下一次的间隔时间，最大不能超过设置的最大间隔时间
+          multiplier: 2
+  kafka:
+    bootstrap-servers: 1.15.87.117:9092
+    producer:
+      # 自定义当前分区
+      partition: 0
+      # 发生错误后，消息重发的次数。
+      retries: 5
+      #当有多个消息需要被发送到同一个分区时，生产者会把它们放在同一个批次里。该参数指定了一个批次可以使用的内存大小，按照字节数计算。(16kb)
+      batch-size: 65536
+      # 设置生产者内存缓冲区的大小。
+      buffer-memory: 33554432
+      # 键的序列化方式
+      key-serializer: org.apache.kafka.common.serialization.StringSerializer
+      # 值的序列化方式
+      value-serializer: org.apache.kafka.common.serialization.StringSerializer
+      # acks=0 ： 生产者在成功写入消息之前不会等待任何来自服务器的响应。
+      # acks=1 ： 只要集群的首领节点收到消息，生产者就会收到一个来自服务器成功响应。
+      # acks=all ：只有当所有参与复制的节点全部收到消息时，生产者才会收到一个来自服务器的成功响应。
+      acks: 1
+      #开启事务功能
+      #transaction-id-prefix: crm-
+      properties:
+        # 请求的最大大小为字节。要小于 message.max.bytes
+        max:
+          request:
+            size: 5242880
+        linger:
+          ms: 1000
+    consumer:
+      #群组ID
+      group-id:
+      # 自动提交的时间间隔 在spring boot 2.X 版本中这里采用的是值的类型为Duration 需要符合特定的格式，如1S,1M,2H,5D
+      auto-commit-interval: 1S
+      # 该属性指定了消费者在读取一个没有偏移量的分区或者偏移量无效的情况下该作何处理：
+      # latest（默认值）在偏移量无效的情况下，消费者将从最新的记录开始读取数据（在消费者启动之后生成的记录）
+      # earliest ：在偏移量无效的情况下，消费者将从起始位置读取分区的记录
+      auto-offset-reset: earliest
+      # 是否自动提交偏移量，默认值是true,为了避免出现重复数据和数据丢失，可以把它设置为false,然后手动提交偏移量
+      enable-auto-commit: false
+      # 键的反序列化方式
+      key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+      # 值的反序列化方式
+      value-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+    listener:
+      # 在侦听器容器中运行的线程数。
+      concurrency: 5
+      #listner负责ack，每调用一次，就立即commit
+      ack-mode: manual_immediate
+      missing-topics-fatal: false
+
+#详细配置参照https://github.com/alibaba/jetcache/blob/master/docs/EN/Config.md
+jetcache:
+  statIntervalMinutes: 15 # 指定统计间隔，以分钟为单位。0表示没有统计数据。
+  areaInCacheName: false  # 是否加入缓存key前缀
+  local:
+    default:
+      keyConvertor: fastjson # key 通过 fastjson 转换为 json
+      type: linkedhashmap
+      poolConfig:
+        minIdle: 5 # 连接池中的最小空闲连接数
+        maxIdle: 20 # 连接池中的最大空闲连接数
+        maxTotal: 50 # 连接池中的最大连接数
+  remote:
+    default:
+      keyConvertor: fastjson # key 通过 fastjson 转换为 json
+      valueEncoder: java #全局配置值编码器只需要远程缓存。两个内置valueEncoder是java和kryo
+      valueDecoder: java #全局配置值解码器只需要远程缓存。两个内置valueEncoder是java和kryo
+      type: redis # 类型，远程缓存类型有redis和tair
+      host: 10.100.244.34 # 远程缓存地址
+      port: 6379 # 远程缓存端口
+      database: 97
+      #      username: admin
+      #      password: admin # 缓存密码
+      poolConfig:
+        minIdle: 5 # 连接池中的最小空闲连接数
+        maxIdle: 20 # 连接池中的最大空闲连接数
+        maxTotal: 50 # 连接池中的最大连接数
+
+# Elasticsearch配置
+elasticsearch:
+  address: 1.15.87.117:9200
+  #  username: elastic
+  #  password: 123456
+  schema: http
+  connectTimeout: 5000
+  socketTimeout: 5000
+  connectionRequestTimeout: 5000
+  maxConnectNum: 100
+  maxConnectPerRoute: 100
+
+# Sa-Token配置
+sa-token:
+  # token名称 (同时也是cookie名称)
+  token-name: satoken
+  # token有效期，单位s 默认30天, -1代表永不过期
+  timeout: 2592000
+  # token临时有效期 (指定时间内无操作就视为token过期) 单位: 秒
+  activity-timeout: -1
+  # 是否允许同一账号并发登录 (为true时允许一起登录, 为false时新登录挤掉旧登录)
+  is-concurrent: true
+  # 在多人登录同一账号时，是否共用一个token (为true时所有登录共用一个token, 为false时每次登录新建一个token)
+  is-share: false
+  # token风格
+  token-style: uuid
+  # 是否输出操作日志
+  is-log: false
+
+xxl:
+  job:
+    admin:
+      addresses: http://test-comm-job.huazhucorp.com/
+    executor:
+      adminAddresses: ${xxl.job.admin.addresses}
+      appid: dh-crm-dev
+      appname: ${xxl.job.executor.appid}
+      #      ip: '10.106.92.118'
+      ip: ''
+      port: 8989
+      logpath: ~/crm-logs/job/logs
+      logretentiondays: -1
+      accessToken: huazhu
+    accessToken: huazhu
+
+hz:
+  systemName: dh-crm
+  sso:
+    saml2:
+      enabled: false
+      #Ĭ默认取 systemName
+      sp-name: ${hz.systemName}_local_swc
+      idp-metadata-url: https://test-idp.huazhu.com/idp/metadata
+      #      idp-metadata-url: "/dh-staging-idp-metadata.xml"
+      max-response-skew: 120
+      sp-url: "http://10.106.92.187:7000"
+      metadata-require-signature: false
+      processing-url: /saml/loginprocess
+      logout-processing-url: /saml/logoutprocess
+
+base:
+  site:
+    vue: true
+    login: http://dev-vue.mgit365.com:8000/#/login
+    index: http://dev-vue.mgit365.com:8000/#/oauth
+    url: http://dev-crm.mgit365.com:${server.port}${server.servlet.context-path}/
+    prof-url: http://test-pms20-apol.huazhucorp.com/
+    conf-url: http://test-pms20-abid.huazhucorp.com/
+    mail-url: http://10.100.245.19:9010/
+    hLink-url: http://test-hlink-gatew.huazhucorp.com/
+    dh-url: http://dailypointplus-test.deutschehospitality.com/
+    hdata-url: https://test-hz-hdata-tob-api.huazhucorp.com
+
+app:
+  swagger:
+    show: true
+  version:
+    buildTime: '@buildTime@'
+earthCrm:
+  timeOut: 3
+  thread:
+    corePoolSize: 10
+    maxPoolSize: 10
+    queueCapacity: 20
+    keepAlive: 60
+  salt: earthCrm
+
+http:
+  #最大连接数
+  maxTotal: 100
+  #并发数
+  defaultMaxPerRoute: 20
+  #创建连接的最长时间
+  connectTimeout: 5000
+  #从连接池中获取到连接的最长时间
+  connectionRequestTimeout: 500
+  #数据传输的最长时间
+  socketTimeout: 15000
+  #提交请求前测试连接是否可用
+  staleConnectionCheckEnabled: true
+  #可用空闲连接过期时间,重用空闲连接时会先检查是否空闲时间超过这个时间，如果超过，释放socket重新建立
+  validateAfterInactivity: 3000000
+

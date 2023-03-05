@@ -1,0 +1,440 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.hworld.mapper.sys.SysHotelMapper">
+  <sql id="Base_Column_List">
+      t.id,
+      t.parent_id,
+      t.hotel_code,
+      t.outer_hotel_no,
+      t.hotel_name,
+      t.hotel_short_name,
+      t.hotel_level,
+      t.hotel_path,
+      t.hotel_type,
+      t.hotel_status,
+      t.zip_code,
+      t.nation_no,
+      t.nation_name,
+      t.province_no,
+      t.province_name,
+      t.city_no,
+      t.city_name,
+      t.region,
+      t.county_no,
+      t.hotel_address_tip,
+      t.route_tips,
+      t.email,
+      t.fax,
+      t.currency_code,
+      t.currency_name,
+      t.source,
+      t.supplier_type,
+      t.app_display,
+      t.deposit_bank,
+      t.bank_address,
+      t.bank_account,
+      t.bank_phone_number,
+      t.invoice_title,
+      t.division,
+      t.clean_level,
+      t.construct_level_no,
+      t.operate_mode_id,
+      t.operate_scope_id,
+      t.when_built,
+      t.first_opening_date,
+      t.trial_opening_date,
+      t.opening_date,
+      t.reopening_date,
+      t.overhaul_time,
+      t.closure_date,
+      t.location_type,
+      t.latitude,
+      t.management_mode,
+      t.mobile_phone,
+      t.phone_code,
+      t.legal_name,
+      t.management_company_name,
+      t.uniform_social_credit_code,
+      t.taxpayer_identity_number,
+      t.taxpayer_scale,
+      t.telephone,
+      t.time_zone,
+      t.url,
+      t.describe,
+      t.manager_name,
+      t.manager_mail,
+      t.reservation_email,
+      t.reservation_phone_country_code,
+      t.reservation_phone,
+      t.reservation_manager_name,
+      t.reservation_manager_mail,
+      t.commercial_registration_id,
+      t.commercial_registration_country_code,
+      t.commercial_registration_country_name,
+      t.commercial_registration_state_code,
+      t.commercial_registration_state_name,
+      t.commercial_registration_city_code,
+      t.commercial_registration_city_name,
+      t.commercial_registration_addr,
+      t.swift_or_bic,
+      t.supervisory_board,
+      t.management_director,
+      t.owner_name,
+      t.deleted_flag,
+      t.created_by,
+      t.created_name,
+      t.created_on,
+      t.modified_by,
+      t.modified_name,
+      t.modified_on
+  </sql>
+  <sql id="Where_List">
+      <if test="createTime != null">
+          AND t.CREATE_TIME_ <![CDATA[ >= ]]> #{createTime}
+      </if>
+      <if test="createUserId != null">
+          AND t.CREATE_USER_ID_ = #{createUserId}
+      </if>
+      <if test="id != null">
+          AND t.id = #{id}
+      </if>
+      <if test="parentId != null">
+          AND t.parent_id = #{parentId}
+      </if>
+      <if test="hotelCode != null and hotelCode.length()!=0">
+          AND t.hotel_code = #{hotelCode}
+      </if>
+      <if test="outerHotelNo != null and outerHotelNo.length()!=0">
+          AND t.outer_hotel_no = #{outerHotelNo}
+      </if>
+      <if test="hotelName != null and hotelName.length()!=0">
+          AND t.hotel_name = #{hotelName}
+      </if>
+      <if test="hotelShortName != null and hotelShortName.length()!=0">
+          AND t.hotel_short_name = #{hotelShortName}
+      </if>
+      <if test="hotelLevel != null">
+          AND t.hotel_level = #{hotelLevel}
+      </if>
+      <if test="hotelPath != null and hotelPath.length()!=0">
+          AND t.hotel_path = #{hotelPath}
+      </if>
+      <if test="hotelType != null and hotelType.length()!=0">
+          AND t.hotel_type = #{hotelType}
+      </if>
+      <if test="hotelStatus != null and hotelStatus.length()!=0">
+          AND t.hotel_status = #{hotelStatus}
+      </if>
+      <if test="zipCode != null and zipCode.length()!=0">
+          AND t.zip_code = #{zipCode}
+      </if>
+      <if test="nationNo != null and nationNo.length()!=0">
+          AND t.nation_no = #{nationNo}
+      </if>
+      <if test="nationName != null and nationName.length()!=0">
+          AND t.nation_name = #{nationName}
+      </if>
+      <if test="provinceNo != null and provinceNo.length()!=0">
+          AND t.province_no = #{provinceNo}
+      </if>
+      <if test="provinceName != null and provinceName.length()!=0">
+          AND t.province_name = #{provinceName}
+      </if>
+      <if test="cityNo != null and cityNo.length()!=0">
+          AND t.city_no = #{cityNo}
+      </if>
+      <if test="cityName != null and cityName.length()!=0">
+          AND t.city_name = #{cityName}
+      </if>
+      <if test="region != null and region.length()!=0">
+          AND t.region = #{region}
+      </if>
+      <if test="countyNo != null and countyNo.length()!=0">
+          AND t.county_no = #{countyNo}
+      </if>
+      <if test="hotelAddressTip != null and hotelAddressTip.length()!=0">
+          AND t.hotel_address_tip = #{hotelAddressTip}
+      </if>
+      <if test="routeTips != null and routeTips.length()!=0">
+          AND t.route_tips = #{routeTips}
+      </if>
+      <if test="email != null and email.length()!=0">
+          AND t.email = #{email}
+      </if>
+      <if test="fax != null and fax.length()!=0">
+          AND t.fax = #{fax}
+      </if>
+      <if test="currencyCode != null and currencyCode.length()!=0">
+          AND t.currency_code = #{currencyCode}
+      </if>
+      <if test="currencyName != null and currencyName.length()!=0">
+          AND t.currency_name = #{currencyName}
+      </if>
+      <if test="source != null and source.length()!=0">
+          AND t.source = #{source}
+      </if>
+      <if test="supplierType != null and supplierType.length()!=0">
+          AND t.supplier_type = #{supplierType}
+      </if>
+      <if test="appDisplay != null and appDisplay.length()!=0">
+          AND t.app_display = #{appDisplay}
+      </if>
+      <if test="depositBank != null and depositBank.length()!=0">
+          AND t.deposit_bank = #{depositBank}
+      </if>
+      <if test="bankAddress != null and bankAddress.length()!=0">
+          AND t.bank_address = #{bankAddress}
+      </if>
+      <if test="bankAccount != null and bankAccount.length()!=0">
+          AND t.bank_account = #{bankAccount}
+      </if>
+      <if test="bankPhoneNumber != null and bankPhoneNumber.length()!=0">
+          AND t.bank_phone_number = #{bankPhoneNumber}
+      </if>
+      <if test="invoiceTitle != null and invoiceTitle.length()!=0">
+          AND t.invoice_title = #{invoiceTitle}
+      </if>
+      <if test="division != null and division.length()!=0">
+          AND t.division = #{division}
+      </if>
+      <if test="cleanLevel != null">
+          AND t.clean_level = #{cleanLevel}
+      </if>
+      <if test="constructLevelNo != null and constructLevelNo.length()!=0">
+          AND t.construct_level_no = #{constructLevelNo}
+      </if>
+      <if test="operateModeId != null">
+          AND t.operate_mode_id = #{operateModeId}
+      </if>
+      <if test="operateScopeId != null">
+          AND t.operate_scope_id = #{operateScopeId}
+      </if>
+      <if test="whenBuilt != null and whenBuilt.length()!=0">
+          AND t.when_built = #{whenBuilt}
+      </if>
+      <if test="firstOpeningDate != null and firstOpeningDate.length()!=0">
+          AND t.first_opening_date = #{firstOpeningDate}
+      </if>
+      <if test="trialOpeningDate != null and trialOpeningDate.length()!=0">
+          AND t.trial_opening_date = #{trialOpeningDate}
+      </if>
+      <if test="openingDate != null and openingDate.length()!=0">
+          AND t.opening_date = #{openingDate}
+      </if>
+      <if test="reopeningDate != null and reopeningDate.length()!=0">
+          AND t.reopening_date = #{reopeningDate}
+      </if>
+      <if test="overhaulTime != null and overhaulTime.length()!=0">
+          AND t.overhaul_time = #{overhaulTime}
+      </if>
+      <if test="closureDate != null and closureDate.length()!=0">
+          AND t.closure_date = #{closureDate}
+      </if>
+      <if test="locationType != null and locationType.length()!=0">
+          AND t.location_type = #{locationType}
+      </if>
+      <if test="latitude != null and latitude.length()!=0">
+          AND t.latitude = #{latitude}
+      </if>
+      <if test="managementMode != null and managementMode.length()!=0">
+          AND t.management_mode = #{managementMode}
+      </if>
+      <if test="mobilePhone != null and mobilePhone.length()!=0">
+          AND t.mobile_phone = #{mobilePhone}
+      </if>
+      <if test="phoneCode != null and phoneCode.length()!=0">
+          AND t.phone_code = #{phoneCode}
+      </if>
+      <if test="legalName != null and legalName.length()!=0">
+          AND t.legal_name = #{legalName}
+      </if>
+      <if test="managementCompanyName != null and managementCompanyName.length()!=0">
+          AND t.management_company_name = #{managementCompanyName}
+      </if>
+      <if test="uniformSocialCreditCode != null and uniformSocialCreditCode.length()!=0">
+          AND t.uniform_social_credit_code = #{uniformSocialCreditCode}
+      </if>
+      <if test="taxpayerIdentityNumber != null and taxpayerIdentityNumber.length()!=0">
+          AND t.taxpayer_identity_number = #{taxpayerIdentityNumber}
+      </if>
+      <if test="taxpayerScale != null">
+          AND t.taxpayer_scale = #{taxpayerScale}
+      </if>
+      <if test="telephone != null and telephone.length()!=0">
+          AND t.telephone = #{telephone}
+      </if>
+      <if test="timeZone != null and timeZone.length()!=0">
+          AND t.time_zone = #{timeZone}
+      </if>
+      <if test="url != null and url.length()!=0">
+          AND t.url = #{url}
+      </if>
+      <if test="describe != null and describe.length()!=0">
+          AND t.describe = #{describe}
+      </if>
+      <if test="managerName != null and managerName.length()!=0">
+          AND t.manager_name = #{managerName}
+      </if>
+      <if test="managerMail != null and managerMail.length()!=0">
+          AND t.manager_mail = #{managerMail}
+      </if>
+      <if test="reservationEmail != null and reservationEmail.length()!=0">
+          AND t.reservation_email = #{reservationEmail}
+      </if>
+      <if test="reservationPhoneCountryCode != null and reservationPhoneCountryCode.length()!=0">
+          AND t.reservation_phone_country_code = #{reservationPhoneCountryCode}
+      </if>
+      <if test="reservationPhone != null and reservationPhone.length()!=0">
+          AND t.reservation_phone = #{reservationPhone}
+      </if>
+      <if test="reservationManagerName != null and reservationManagerName.length()!=0">
+          AND t.reservation_manager_name = #{reservationManagerName}
+      </if>
+      <if test="reservationManagerMail != null and reservationManagerMail.length()!=0">
+          AND t.reservation_manager_mail = #{reservationManagerMail}
+      </if>
+      <if test="commercialRegistrationId != null and commercialRegistrationId.length()!=0">
+          AND t.commercial_registration_id = #{commercialRegistrationId}
+      </if>
+      <if test="commercialRegistrationCountryCode != null and commercialRegistrationCountryCode.length()!=0">
+          AND t.commercial_registration_country_code = #{commercialRegistrationCountryCode}
+      </if>
+      <if test="commercialRegistrationCountryName != null and commercialRegistrationCountryName.length()!=0">
+          AND t.commercial_registration_country_name = #{commercialRegistrationCountryName}
+      </if>
+      <if test="commercialRegistrationStateCode != null and commercialRegistrationStateCode.length()!=0">
+          AND t.commercial_registration_state_code = #{commercialRegistrationStateCode}
+      </if>
+      <if test="commercialRegistrationStateName != null and commercialRegistrationStateName.length()!=0">
+          AND t.commercial_registration_state_name = #{commercialRegistrationStateName}
+      </if>
+      <if test="commercialRegistrationCityCode != null and commercialRegistrationCityCode.length()!=0">
+          AND t.commercial_registration_city_code = #{commercialRegistrationCityCode}
+      </if>
+      <if test="commercialRegistrationCityName != null and commercialRegistrationCityName.length()!=0">
+          AND t.commercial_registration_city_name = #{commercialRegistrationCityName}
+      </if>
+      <if test="commercialRegistrationAddr != null and commercialRegistrationAddr.length()!=0">
+          AND t.commercial_registration_addr = #{commercialRegistrationAddr}
+      </if>
+      <if test="swiftOrBIC != null and swiftOrBIC.length()!=0">
+          AND t.swift_or_bic = #{swiftOrBIC}
+      </if>
+      <if test="supervisoryBoard != null and supervisoryBoard.length()!=0">
+          AND t.supervisory_board = #{supervisoryBoard}
+      </if>
+      <if test="managementDirector != null and managementDirector.length()!=0">
+          AND t.management_director = #{managementDirector}
+      </if>
+      <if test="ownerName != null and ownerName.length()!=0">
+          AND t.owner_name = #{ownerName}
+      </if>
+      <if test="deletedFlag != null">
+          AND t.deleted_flag = #{deletedFlag}
+      </if>
+      <if test="createdBy != null">
+          AND t.created_by = #{createdBy}
+      </if>
+      <if test="createdName != null and createdName.length()!=0">
+          AND t.created_name = #{createdName}
+      </if>
+      <if test="createdOn != null">
+          AND t.created_on <![CDATA[ >= ]]> #{createdOn}
+      </if>
+      <if test="modifiedBy != null">
+          AND t.modified_by = #{modifiedBy}
+      </if>
+      <if test="modifiedName != null and modifiedName.length()!=0">
+          AND t.modified_name = #{modifiedName}
+      </if>
+      <if test="modifiedOn != null">
+          AND t.modified_on <![CDATA[ >= ]]> #{modifiedOn}
+      </if>
+  </sql>
+  <sql id="Set_List">
+      t.parent_id = #{parentId},
+      t.hotel_code = #{hotelCode},
+      t.outer_hotel_no = #{outerHotelNo},
+      t.hotel_name = #{hotelName},
+      t.hotel_short_name = #{hotelShortName},
+      t.hotel_level = #{hotelLevel},
+      t.hotel_path = #{hotelPath},
+      t.hotel_type = #{hotelType},
+      t.hotel_status = #{hotelStatus},
+      t.zip_code = #{zipCode},
+      t.nation_no = #{nationNo},
+      t.nation_name = #{nationName},
+      t.province_no = #{provinceNo},
+      t.province_name = #{provinceName},
+      t.city_no = #{cityNo},
+      t.city_name = #{cityName},
+      t.region = #{region},
+      t.county_no = #{countyNo},
+      t.hotel_address_tip = #{hotelAddressTip},
+      t.route_tips = #{routeTips},
+      t.email = #{email},
+      t.fax = #{fax},
+      t.currency_code = #{currencyCode},
+      t.currency_name = #{currencyName},
+      t.source = #{source},
+      t.supplier_type = #{supplierType},
+      t.app_display = #{appDisplay},
+      t.deposit_bank = #{depositBank},
+      t.bank_address = #{bankAddress},
+      t.bank_account = #{bankAccount},
+      t.bank_phone_number = #{bankPhoneNumber},
+      t.invoice_title = #{invoiceTitle},
+      t.division = #{division},
+      t.clean_level = #{cleanLevel},
+      t.construct_level_no = #{constructLevelNo},
+      t.operate_mode_id = #{operateModeId},
+      t.operate_scope_id = #{operateScopeId},
+      t.when_built = #{whenBuilt},
+      t.first_opening_date = #{firstOpeningDate},
+      t.trial_opening_date = #{trialOpeningDate},
+      t.opening_date = #{openingDate},
+      t.reopening_date = #{reopeningDate},
+      t.overhaul_time = #{overhaulTime},
+      t.closure_date = #{closureDate},
+      t.location_type = #{locationType},
+      t.latitude = #{latitude},
+      t.management_mode = #{managementMode},
+      t.mobile_phone = #{mobilePhone},
+      t.phone_code = #{phoneCode},
+      t.legal_name = #{legalName},
+      t.management_company_name = #{managementCompanyName},
+      t.uniform_social_credit_code = #{uniformSocialCreditCode},
+      t.taxpayer_identity_number = #{taxpayerIdentityNumber},
+      t.taxpayer_scale = #{taxpayerScale},
+      t.telephone = #{telephone},
+      t.time_zone = #{timeZone},
+      t.url = #{url},
+      t.describe = #{describe},
+      t.manager_name = #{managerName},
+      t.manager_mail = #{managerMail},
+      t.reservation_email = #{reservationEmail},
+      t.reservation_phone_country_code = #{reservationPhoneCountryCode},
+      t.reservation_phone = #{reservationPhone},
+      t.reservation_manager_name = #{reservationManagerName},
+      t.reservation_manager_mail = #{reservationManagerMail},
+      t.commercial_registration_id = #{commercialRegistrationId},
+      t.commercial_registration_country_code = #{commercialRegistrationCountryCode},
+      t.commercial_registration_country_name = #{commercialRegistrationCountryName},
+      t.commercial_registration_state_code = #{commercialRegistrationStateCode},
+      t.commercial_registration_state_name = #{commercialRegistrationStateName},
+      t.commercial_registration_city_code = #{commercialRegistrationCityCode},
+      t.commercial_registration_city_name = #{commercialRegistrationCityName},
+      t.commercial_registration_addr = #{commercialRegistrationAddr},
+      t.swift_or_bic = #{swiftOrBIC},
+      t.supervisory_board = #{supervisoryBoard},
+      t.management_director = #{managementDirector},
+      t.owner_name = #{ownerName},
+      t.deleted_flag = #{deletedFlag},
+      t.created_by = #{createdBy},
+      t.created_name = #{createdName},
+      t.created_on = #{createdOn},
+      t.modified_by = #{modifiedBy},
+      t.modified_name = #{modifiedName},
+      t.modified_on = #{modifiedOn}
+  </sql>
+</mapper>

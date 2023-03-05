@@ -1,0 +1,129 @@
+<configuration>
+
+    <contextName>earth-crm-server</contextName>
+
+    <!-- 引用spring boot中已定义的基础配置 copy 自 base.xml，并删除root-->
+    <include resource="org/springframework/boot/logging/logback/defaults.xml"/>
+    <include resource="org/springframework/boot/logging/logback/console-appender.xml"/>
+
+    <springProfile name="dev">
+        <property name="LOG_FILE" value="/data/logs"/>
+        <property name="KEEP_MAX_DAY" value="60"/>
+    </springProfile>
+
+    <springProfile name="test">
+        <property name="LOG_FILE" value="/data/logs"/>
+        <property name="KEEP_MAX_DAY" value="60"/>
+    </springProfile>
+
+    <springProfile name="prod">
+        <property name="LOG_FILE" value="/data/logs"/>
+        <property name="KEEP_MAX_DAY" value="60"/>
+    </springProfile>
+
+
+    <!--输出到控制台-->
+    <appender name="console" class="ch.qos.logback.core.ConsoleAppender">
+        <encoder>
+            <!--格式化输出：%d:表示日期    %thread:表示线程名     %-5level:级别从左显示5个字符宽度  %msg:日志消息    %n:是换行符-->
+            <pattern>%red(%d{yyyy-MM-dd HH:mm:ss.SSS}) %highlight(%5level) %green([%thread]) --- %-40logger : %msg%n
+            </pattern>
+            <!--<pattern>%d %p (%file:%line\)- %m%n</pattern>-->
+            <charset>UTF-8</charset>
+        </encoder>
+    </appender>
+    <!-- 测试环境、演示环境 -->
+    <appender name="FILE" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <fileNamePattern>${LOG_FILE}/tcloud-dingtalk-server.%d{yyyy-MM-dd}.log</fileNamePattern>
+            <maxHistory>30</maxHistory>
+        </rollingPolicy>
+        <encoder>
+            <charset>utf-8</charset>
+            <Pattern>%d %-5level [%thread] %logger{0}: %msg%n</Pattern>
+        </encoder>
+    </appender>
+    <appender name="ASYNC" class="ch.qos.logback.classic.AsyncAppender">
+        <discardingThreshold>0</discardingThreshold>
+        <queueSize>2048</queueSize>
+        <!-- 引用org/springframework/boot/logging/logback/file-appender.xml 中定义的FILE -->
+        <appender-ref ref="FILE"/>
+    </appender>
+
+
+    <!--    &lt;!&ndash; 这个appender的说明： https://github.com/danielwegener/logback-kafka-appender &ndash;&gt;-->
+<!--    <appender name="KafkaAppender" class="com.github.danielwegener.logback.kafka.KafkaAppender">-->
+<!--        <encoder class="com.github.danielwegener.logback.kafka.encoding.LayoutKafkaMessageEncoder">-->
+<!--            <layout class="net.logstash.logback.layout.LogstashLayout">-->
+<!--                <includeContext>true</includeContext>-->
+<!--                <includeCallerData>true</includeCallerData>-->
+<!--                &lt;!&ndash;增加自定义的字段&ndash;&gt;-->
+<!--                <customFields>{"system":"prod"}</customFields>-->
+<!--                <customFields>{"appId":"tcloud_wechat_prod"}</customFields>-->
+<!--                &lt;!&ndash;自定义字段的简称&ndash;&gt;-->
+<!--                <fieldNames class="net.logstash.logback.fieldnames.ShortenedFieldNames" />-->
+<!--            </layout>-->
+<!--            <charset>UTF-8</charset>-->
+<!--        </encoder>-->
+
+<!--        &lt;!&ndash;kafka topic 需要与配置文件里面的topic一致 否则kafka会沉默并鄙视你&ndash;&gt;-->
+<!--        <topic>log-tcloud-wechat-provider-service-prod</topic>-->
+<!--        <keyingStrategy class="com.github.danielwegener.logback.kafka.keying.ThreadNameKeyingStrategy" />-->
+<!--        <deliveryStrategy class="com.github.danielwegener.logback.kafka.delivery.AsynchronousDeliveryStrategy" />-->
+<!--        <producerConfig>bootstrap.servers=logstash:9092</producerConfig>-->
+<!--        <appender-ref ref="file" />-->
+<!--    </appender>-->
+    <root level="INFO">
+        <appender-ref ref="ASYNC"/>
+        <appender-ref ref="CONSOLE"/>
+    </root>
+
+    <!-- 单独定义日志级别 -->
+    <logger name="javax.activation" level="WARN"/>
+    <logger name="javax.mail" level="WARN"/>
+    <logger name="javax.management.remote" level="WARN"/>
+    <logger name="javax.xml.bind" level="WARN"/>
+    <logger name="ch.qos.logback" level="WARN"/>
+    <logger name="com.codahale.metrics" level="WARN"/>
+    <logger name="com.ryantenney" level="WARN"/>
+    <logger name="com.sun" level="WARN"/>
+    <logger name="com.zaxxer" level="WARN"/>
+    <logger name="io.undertow" level="WARN"/>
+    <logger name="io.netty" level="INFO"/>
+    <logger name="io.undertow.websockets.jsr" level="ERROR"/>
+    <logger name="org.ehcache" level="WARN"/>
+    <logger name="org.apache" level="WARN"/>
+    <logger name="org.apache.catalina.startup.DigesterFactory" level="ERROR"/>
+    <logger name="org.bson" level="WARN"/>
+    <logger name="org.hibernate.validator" level="WARN"/>
+    <logger name="org.hibernate" level="WARN"/>
+    <logger name="org.hibernate.ejb.HibernatePersistence" level="ERROR"/>
+    <logger name="org.springframework" level="WARN"/>
+    <logger name="org.springframework.web" level="WARN"/>
+    <logger name="org.springframework.security" level="INFO"/>
+    <logger name="org.springframework.cache" level="WARN"/>
+    <logger name="org.thymeleaf" level="WARN"/>
+    <logger name="org.xnio" level="WARN"/>
+    <logger name="springfox" level="WARN"/>
+    <logger name="sun.rmi" level="WARN"/>
+    <logger name="sun.rmi.transport" level="WARN"/>
+    <logger name="com.baomidou.mybatisplus" level="INFO"/>
+    <logger name="org.mybatis" level="INFO"/>
+
+    <logger name="com.alibaba.dubbo" level="INFO"/>
+    <logger name="springfox.documentation.schema.property" level="ERROR"/>
+    <logger name="com.ulisesbocchio.jasyptspringboot" level="WARN"/>
+    <logger name="io.swagger.models.parameters.AbstractSerializableParameter" level="ERROR"/>
+    <logger name="liquibase" level="INFO"/>
+    <logger name="org.flowable" level="DEBUG"/>
+
+    <logger name="java.sql.Connection" level="DEBUG" />
+    <logger name="java.sql.Statement" level="DEBUG" />
+    <logger name="java.sql.PreparedStatement" level="DEBUG"/>
+    <shutdownHook class="ch.qos.logback.core.hook.DelayingShutdownHook"/>
+
+    <!-- 日志级别变更穿透到java.util.logging -->
+    <contextListener class="ch.qos.logback.classic.jul.LevelChangePropagator">
+        <resetJUL>true</resetJUL>
+    </contextListener>
+</configuration>

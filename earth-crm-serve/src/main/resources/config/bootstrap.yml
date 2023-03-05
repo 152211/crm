@@ -1,0 +1,20 @@
+spring:
+  profiles:
+    active: 'dev'
+  mvc:
+    favicon:
+      enabled: false
+  servlet:
+    multipart:
+      enabled: true
+      max-file-size: 512MB
+      max-request-size: 1GB
+  freemarker:
+    # 是否启用mvc视图，目前前后端分离，关闭mvc视图解析
+    enabled: false
+    # 模板路径
+    template-loader-path: classpath:/templates/freemarker/
+    # 默认开启缓存
+    cache: true
+    # 编码格式
+    charset: UTF-8

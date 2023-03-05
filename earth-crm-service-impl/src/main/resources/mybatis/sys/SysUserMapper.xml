@@ -1,0 +1,140 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.hworld.mapper.sys.SysUserMapper">
+  <sql id="Base_Column_List">
+      t.id,
+      t.pass_word,
+      t.employee_no,
+      t.name,
+      t.last_name,
+      t.first_name,
+      t.gender,
+      t.certificate_number,
+      t.language,
+      t.job_title,
+      t.mobile,
+      t.email,
+      t.address,
+      t.status,
+      t.type,
+      t.source,
+      t.avatar,
+      t.last_login_time,
+      t.deleted_flag,
+      t.created_by,
+      t.created_name,
+      t.created_on,
+      t.modified_by,
+      t.modified_name,
+      t.modified_on
+  </sql>
+  <sql id="Where_List">
+      <if test="createTime != null">
+          AND t.CREATE_TIME_ <![CDATA[ >= ]]> #{createTime}
+      </if>
+      <if test="createUserId != null">
+          AND t.CREATE_USER_ID_ = #{createUserId}
+      </if>
+      <if test="id != null">
+          AND t.id = #{id}
+      </if>
+      <if test="passWord != null and passWord.length()!=0">
+          AND t.pass_word = #{passWord}
+      </if>
+      <if test="employeeNo != null and employeeNo.length()!=0">
+          AND t.employee_no = #{employeeNo}
+      </if>
+      <if test="name != null and name.length()!=0">
+          AND t.name = #{name}
+      </if>
+      <if test="lastName != null and lastName.length()!=0">
+          AND t.last_name = #{lastName}
+      </if>
+      <if test="firstName != null and firstName.length()!=0">
+          AND t.first_name = #{firstName}
+      </if>
+      <if test="gender != null and gender.length()!=0">
+          AND t.gender = #{gender}
+      </if>
+      <if test="certificateNumber != null and certificateNumber.length()!=0">
+          AND t.certificate_number = #{certificateNumber}
+      </if>
+      <if test="language != null and language.length()!=0">
+          AND t.language = #{language}
+      </if>
+      <if test="jobTitle != null and jobTitle.length()!=0">
+          AND t.job_title = #{jobTitle}
+      </if>
+      <if test="mobile != null and mobile.length()!=0">
+          AND t.mobile = #{mobile}
+      </if>
+      <if test="email != null and email.length()!=0">
+          AND t.email = #{email}
+      </if>
+      <if test="address != null and address.length()!=0">
+          AND t.address = #{address}
+      </if>
+      <if test="status != null and status.length()!=0">
+          AND t.status = #{status}
+      </if>
+      <if test="type != null and type.length()!=0">
+          AND t.type = #{type}
+      </if>
+      <if test="source != null and source.length()!=0">
+          AND t.source = #{source}
+      </if>
+      <if test="avatar != null and avatar.length()!=0">
+          AND t.avatar = #{avatar}
+      </if>
+      <if test="lastLoginTime != null">
+          AND t.last_login_time <![CDATA[ >= ]]> #{lastLoginTime}
+      </if>
+      <if test="deletedFlag != null and deletedFlag.length()!=0">
+          AND t.deleted_flag = #{deletedFlag}
+      </if>
+      <if test="createdBy != null">
+          AND t.created_by = #{createdBy}
+      </if>
+      <if test="createdName != null and createdName.length()!=0">
+          AND t.created_name = #{createdName}
+      </if>
+      <if test="createdOn != null">
+          AND t.created_on <![CDATA[ >= ]]> #{createdOn}
+      </if>
+      <if test="modifiedBy != null">
+          AND t.modified_by = #{modifiedBy}
+      </if>
+      <if test="modifiedName != null and modifiedName.length()!=0">
+          AND t.modified_name = #{modifiedName}
+      </if>
+      <if test="modifiedOn != null">
+          AND t.modified_on <![CDATA[ >= ]]> #{modifiedOn}
+      </if>
+  </sql>
+  <sql id="Set_List">
+      t.pass_word = #{passWord},
+      t.employee_no = #{employeeNo},
+      t.name = #{name},
+      t.last_name = #{lastName},
+      t.first_name = #{firstName},
+      t.gender = #{gender},
+      t.certificate_number = #{certificateNumber},
+      t.language = #{language},
+      t.job_title = #{jobTitle},
+      t.mobile = #{mobile},
+      t.email = #{email},
+      t.address = #{address},
+      t.status = #{status},
+      t.type = #{type},
+      t.source = #{source},
+      t.avatar = #{avatar},
+      t.last_login_time = #{lastLoginTime},
+      t.deleted_flag = #{deletedFlag},
+      t.created_by = #{createdBy},
+      t.created_name = #{createdName},
+      t.created_on = #{createdOn},
+      t.modified_by = #{modifiedBy},
+      t.modified_name = #{modifiedName},
+      t.modified_on = #{modifiedOn}
+  </sql>
+</mapper>

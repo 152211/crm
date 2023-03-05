@@ -1,0 +1,27 @@
+<?xml version="1.0"?>
+<md:EntityDescriptor xmlns:md="urn:oasis:names:tc:SAML:2.0:metadata" xmlns:ds="http://www.w3.org/2000/09/xmldsig#" entityID="https://login-staging.deutschehospitality.com/saml2/idp/metadata.php">
+    <md:IDPSSODescriptor protocolSupportEnumeration="urn:oasis:names:tc:SAML:2.0:protocol">
+        <md:KeyDescriptor use="signing">
+            <ds:KeyInfo xmlns:ds="http://www.w3.org/2000/09/xmldsig#">
+                <ds:X509Data>
+                    <ds:X509Certificate>MIIDczCCAlugAwIBAgIJAPjjvRx0r05QMA0GCSqGSIb3DQEBBQUAMC8xCzAJBgNVBAYTAkRFMRMwEQYDVQQIEwpTb21lLVN0YXRlMQswCQYDVQQKEwJESDAeFw0xODA0MjExNzA0NDBaFw0yODA0MjAxNzA0NDBaMC8xCzAJBgNVBAYTAkRFMRMwEQYDVQQIEwpTb21lLVN0YXRlMQswCQYDVQQKEwJESDCCASIwDQYJKoZIhvcNAQEBBQADggEPADCCAQoCggEBANy04ASi1sUCoIKyRywRUNacmxSkUK0P5DRP6Vunis2Up8GaC9A92wUkf2lYXaGjEi9aPlposb7hD2WY4x1Gt3UpMcE94LBYgoS8YhVDMKqADVP7wVkt6qyEOLyFEeDqSf1Cuy8ubT6k7AVqjQvLhvggEsIwAaB/Dd/euv2oj3A0MZqE2r1kAbSGX0X2hvQDX+LwlT2vlacPMPg4YQVvQJ3Rd0MLjRJOlxF8IyjIaPv9ddAaeg5lX3jLEw/+b/33v8d9EySCUehPmTP4ysjhpDL4cO7A2LSLjZqGvVHs18gnBOC4+m6RdUKyGxQzZ1IGPz5n94flzo343Bii1O0IIRECAwEAAaOBkTCBjjAdBgNVHQ4EFgQU/qZCN1hCluJ1H9SD5XKY0WU8+NowXwYDVR0jBFgwVoAU/qZCN1hCluJ1H9SD5XKY0WU8+NqhM6QxMC8xCzAJBgNVBAYTAkRFMRMwEQYDVQQIEwpTb21lLVN0YXRlMQswCQYDVQQKEwJESIIJAPjjvRx0r05QMAwGA1UdEwQFMAMBAf8wDQYJKoZIhvcNAQEFBQADggEBAAaREboXvVU2AsaO2TLpEua+4wM3ZVTj6/jlV25yq7pbCY/yqNktv8amKmfAs24xqtG0qg67gHTb7M1YpFb1hpgdKTZLJsehSa7rowSIDKP2IPL2a6JDzCfHWzRaR7NqeKMUrH1vhSnMG21l9GMWalp77EmE2uA5g9xGObwrWTgBl6V98Xa4W/X8SIQbsV46UpVopku3+GkI9fk6i1OpMdZrUqfvQ+rCMl0MgNTjWoDFBdm9rzY0YA5OqZvrJhDe84C37uIoeBRRgSIPgVibxfTTl93hlNQ6qZQPK2ZZjHRgXm8ozuqawDJdQZOXN41b4/kGXThASDJHt83j/LqprJE=</ds:X509Certificate>
+                </ds:X509Data>
+            </ds:KeyInfo>
+        </md:KeyDescriptor>
+        <md:KeyDescriptor use="encryption">
+            <ds:KeyInfo xmlns:ds="http://www.w3.org/2000/09/xmldsig#">
+                <ds:X509Data>
+                    <ds:X509Certificate>MIIDczCCAlugAwIBAgIJAPjjvRx0r05QMA0GCSqGSIb3DQEBBQUAMC8xCzAJBgNVBAYTAkRFMRMwEQYDVQQIEwpTb21lLVN0YXRlMQswCQYDVQQKEwJESDAeFw0xODA0MjExNzA0NDBaFw0yODA0MjAxNzA0NDBaMC8xCzAJBgNVBAYTAkRFMRMwEQYDVQQIEwpTb21lLVN0YXRlMQswCQYDVQQKEwJESDCCASIwDQYJKoZIhvcNAQEBBQADggEPADCCAQoCggEBANy04ASi1sUCoIKyRywRUNacmxSkUK0P5DRP6Vunis2Up8GaC9A92wUkf2lYXaGjEi9aPlposb7hD2WY4x1Gt3UpMcE94LBYgoS8YhVDMKqADVP7wVkt6qyEOLyFEeDqSf1Cuy8ubT6k7AVqjQvLhvggEsIwAaB/Dd/euv2oj3A0MZqE2r1kAbSGX0X2hvQDX+LwlT2vlacPMPg4YQVvQJ3Rd0MLjRJOlxF8IyjIaPv9ddAaeg5lX3jLEw/+b/33v8d9EySCUehPmTP4ysjhpDL4cO7A2LSLjZqGvVHs18gnBOC4+m6RdUKyGxQzZ1IGPz5n94flzo343Bii1O0IIRECAwEAAaOBkTCBjjAdBgNVHQ4EFgQU/qZCN1hCluJ1H9SD5XKY0WU8+NowXwYDVR0jBFgwVoAU/qZCN1hCluJ1H9SD5XKY0WU8+NqhM6QxMC8xCzAJBgNVBAYTAkRFMRMwEQYDVQQIEwpTb21lLVN0YXRlMQswCQYDVQQKEwJESIIJAPjjvRx0r05QMAwGA1UdEwQFMAMBAf8wDQYJKoZIhvcNAQEFBQADggEBAAaREboXvVU2AsaO2TLpEua+4wM3ZVTj6/jlV25yq7pbCY/yqNktv8amKmfAs24xqtG0qg67gHTb7M1YpFb1hpgdKTZLJsehSa7rowSIDKP2IPL2a6JDzCfHWzRaR7NqeKMUrH1vhSnMG21l9GMWalp77EmE2uA5g9xGObwrWTgBl6V98Xa4W/X8SIQbsV46UpVopku3+GkI9fk6i1OpMdZrUqfvQ+rCMl0MgNTjWoDFBdm9rzY0YA5OqZvrJhDe84C37uIoeBRRgSIPgVibxfTTl93hlNQ6qZQPK2ZZjHRgXm8ozuqawDJdQZOXN41b4/kGXThASDJHt83j/LqprJE=</ds:X509Certificate>
+                </ds:X509Data>
+            </ds:KeyInfo>
+        </md:KeyDescriptor>
+        <md:SingleLogoutService Binding="urn:oasis:names:tc:SAML:2.0:bindings:HTTP-Redirect" Location="https://login-staging.deutschehospitality.com/saml2/idp/SingleLogoutService.php"/>
+        <md:NameIDFormat>urn:oasis:names:tc:SAML:2.0:nameid-format:transient</md:NameIDFormat>
+        <md:SingleSignOnService Binding="urn:oasis:names:tc:SAML:2.0:bindings:HTTP-Redirect" Location="https://login-staging.deutschehospitality.com/saml2/idp/SSOService.php"/>
+    </md:IDPSSODescriptor>
+    <md:ContactPerson contactType="technical">
+        <md:GivenName>SHA</md:GivenName>
+        <md:SurName>webmaster</md:SurName>
+        <md:EmailAddress>webmaster@deutschehospitality.com</md:EmailAddress>
+    </md:ContactPerson>
+</md:EntityDescriptor>
