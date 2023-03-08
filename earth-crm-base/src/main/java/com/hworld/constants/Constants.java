@@ -67,7 +67,7 @@ public interface Constants {
 
     final String CRM_WORLD_LOG = "crm-world-log";
 
-    final String CRM_WORLD_MEMBER = "crm-world-member-test1";
+    final String CRM_WORLD_MEMBER = "crm-world-member";
 
     final String CRM_REQUEST_LOG = "crm-request-log";
 }
