@@ -8,7 +8,7 @@ server:
 
 logging:
   file:
-    path: G:\data\logs\
+    path: D:\data\logs\
   level:
     # 覆盖 logback-spring.xml中root定义的级别
     ROOT: info
@@ -42,7 +42,7 @@ spring:
     time-zone: UTC
   datasource:
     driver-class-name: com.mysql.jdbc.Driver
-    url: jdbc:mysql://1.15.87.117:3306/v2.0_crm_member_db?rewriteBatchedStatements=true&useUnicode=true&characterEncoding=UTF-8&serverTimezone=UTC
+    url: jdbc:mysql://1.15.87.117:3306/crm_member_db?rewriteBatchedStatements=true&useUnicode=true&characterEncoding=UTF-8&serverTimezone=UTC
     username: crm
     password: HLu@520
   redis:

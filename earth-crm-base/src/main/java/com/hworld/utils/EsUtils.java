@@ -10,6 +10,7 @@ import com.hworld.bo.es.EsBaseBO;
 import com.hworld.bo.es.EsSaveBO;
 import com.hworld.bo.es.EsUpdateBO;
 import com.hworld.constants.DatePatternConstant;
+import com.hworld.enums.ErrorEnum;
 import lombok.extern.slf4j.Slf4j;
 import org.elasticsearch.action.delete.DeleteRequest;
 import org.elasticsearch.action.delete.DeleteResponse;
@@ -21,6 +22,7 @@ import org.elasticsearch.action.update.UpdateRequest;
 import org.elasticsearch.action.update.UpdateResponse;
 import org.elasticsearch.client.RequestOptions;
 import org.elasticsearch.client.RestHighLevelClient;
+import org.elasticsearch.client.indices.GetIndexRequest;
 import org.elasticsearch.common.xcontent.XContentType;
 import org.elasticsearch.index.query.BoolQueryBuilder;
 import org.elasticsearch.index.query.MatchPhraseQueryBuilder;
@@ -76,6 +78,15 @@ public class EsUtils {
      * @return
      */
     public <T> RestStatus saveOrUpdate(EsSaveBO esSaveBO, Class<T> respClassType) throws IOException {
+        if (esSaveBO == null || MyStringUtils.isNullParam(esSaveBO.getIndex())) {
+            log.error("EsUtils.saveOrUpdate error messages:{}", "index" + ErrorEnum.NOT_EXIST_ERROR);
+            throw new Error("index is null");
+        }
+        //判断索引是否存在 不存在直接新增
+        if (!exists(esSaveBO.getIndex())) {
+            return save(esSaveBO);
+        }
+
         if (getEsId(esSaveBO, respClassType) == null) {
             return save(esSaveBO);
         } else {
@@ -132,6 +143,11 @@ public class EsUtils {
         if (esBaseBO == null || MyStringUtils.isNullParam(esBaseBO.getEsId())) {
             return null;
         }
+        //判断索引是否存在
+        if (!exists(esBaseBO.getIndex())) {
+            log.error("EsUtils.getEsId.error message={}:", "index:" + esBaseBO.getIndex() + ErrorEnum.NOT_EXIST_ERROR.getMsgEn());
+            return null;
+        }
 
         BoolQueryBuilder queryBuilder = buildFuzzQueryBuilder(esBaseBO);
         // 只查询1个
@@ -147,6 +163,19 @@ public class EsUtils {
             return null;
         }
         return JSONObject.parseObject(hits[0].getSourceAsString(), respClassType);
+    }
+
+    /**
+     * 判断索引是否存在
+     *
+     * @param indexName
+     * @return
+     * @throws IOException
+     */
+    public boolean exists(String indexName) throws IOException {
+        //判断索引是否存在
+        GetIndexRequest exist = new GetIndexRequest(indexName);
+        return restHighLevelClient.indices().exists(exist, RequestOptions.DEFAULT);
     }
 
     /**
